@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script  setup>
 import api from '@/Api';
 import axios from 'axios';
 import { computed, onMounted, reactive, ref } from 'vue';

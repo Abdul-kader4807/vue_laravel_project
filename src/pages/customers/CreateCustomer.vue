@@ -1,5 +1,5 @@
 
-<script lang="ts" setup>
+<script setup>
 
 const customers = ref([])
 onMounted(() => {
