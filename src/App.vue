@@ -1,7 +1,10 @@
 <script setup>
+// import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Sidebar from './layout/Sidebar.vue';
 import Header from './layout/Header.vue';
 import Footer from './layout/Footer.vue';
+
+
 
 
 </script>

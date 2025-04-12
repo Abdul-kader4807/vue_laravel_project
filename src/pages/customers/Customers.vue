@@ -7,6 +7,7 @@ import { debounce } from 'lodash';
 
 
 const customers = ref([]);
+const links = ref({});
 const search = ref('');
 const modalForm = ref(null)
 
@@ -21,12 +22,16 @@ const fetchCustomers = (url = "/customers") => {
     }
     api.get(url, { params: { search: search.value } })
         .then((result) => {
-            console.log(result.data.data);
+            console.log(result);
             customers.value = result.data.data
+            links.value = result.data
+
         }).catch((err) => {
             console.log(err);
         });
 }
+console.clear()
+console.log(links)
 
 // const debouncedFetchCustomers = debounce(fetchUsers, 300);
 const formatPageLabel = (label) => {
@@ -41,7 +46,7 @@ onMounted(() => {
 });
 
 
-// delete User
+// delete customer
 const deleteCustomers = (id) => {
     console.log(id);
 
@@ -100,7 +105,7 @@ const deleteCustomers = (id) => {
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                         aria-label="Start date: activate to sort column ascending"
                                         style="width: 107.422px;">Address</th>
-                                        
+
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                         aria-label="Salary: activate to sort column ascending"
                                         style="width: 86.3594px;">Action</th>
@@ -110,7 +115,7 @@ const deleteCustomers = (id) => {
                                 <tr v-for="customer in customers" role="row" class="odd">
                                     <td class="sorting_1">{{ customer.id }}</td>
                                     <td>{{ customer.name }}</td>
-                                    <td> <img width="100" :src="`${imgUrl}/${customer.photo}`" alt="" srcset=""></td>
+                                    <td> <img width="50" :src="`${imgUrl}/${customer.photo}`"  alt="" srcset=""></td>
                                     <td>{{ customer.phone }}</td>
                                     <td>{{ customer.email }}</td>
                                     <td>{{ customer.address }}</td>
@@ -127,45 +132,15 @@ const deleteCustomers = (id) => {
                         </table>
                     </div>
                 </div>
-                <div class="list-pagination">
+                <div class="list-pagination col-md-12 d-flex justify-content-end cursor-pointer">
                     <ul class="pagination">
-                        <li v-for="page in customers.links" :key="page.label"
-                            :class="page.active ? 'active cursor-pointer' : 'cursor-pointer'"><a class="page"
+                        <li v-for="page in links.links" :key="page.label" class="page-item"><a
+                                :class="page.active ? 'active page-link' : 'page-link'"
                                 @click="fetchCustomers(page.url)" data-i="1" data-page="1">{{
                                 formatPageLabel(page.label) }}</a></li>
                     </ul>
                 </div>
-                <div class="row">
-
-                    <!-- <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1
-                            to 10 of 57 entries</div>
-                    </div> -->
-                     <div class="col-sm-12 col-md-12 d-flex justify-content-end ">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="example2_previous"><a
-                                        href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
-                                        class="page-link">Prev</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="example2"
-                                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                        data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                        data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                        data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                        data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                <li class="paginate_button page-item next" id="example2_next"><a href="#"
-                                        aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> 
-                </div>
+                
             </div>
         </div>
     </div>
