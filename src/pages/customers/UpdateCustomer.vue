@@ -1,11 +1,13 @@
 
 <script setup>
 import api from '@/Api';
-import { onMounted, reactive } from 'vue';
+
+import { onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 
 const { id } = useRoute().params;
+const previewUrl = ref(null); // Add this line
 
 const customerData = reactive({
   id: '',
@@ -13,15 +15,30 @@ const customerData = reactive({
   email: '',
   phone: '',
   address: '',
-  photo: null,
+  photo: '',
 });
 
+const UpdateCustomers = () => {
+  api.put("/customers/" + customer.id, customer)
+    .then(res => {
+      console.log(res);
+
+      router.push({ path: '/customers' })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
+
+
 const fetchCustomer = () => {
-  api.get(`/customers/${route.params.id}`)
-    .then((result) => {
-      const customer = result.data.customer;
-      customerData.id = customer.id;
-      customerData.name = customer.name;
+  api.get(`/customers/${id}`)
+    .then((res) => {
+      console.log(res.data);
+
+      customer.id = res.customer.id;
+      customer.name = res.customer.name;
       customerData.email = customer.email;
       customerData.phone = customer.phone;
       customerData.address = customer.address;
