@@ -4,6 +4,7 @@ import Customers from "@/pages/customers/Customers.vue";
 import UpdateCustomer from "@/pages/customers/UpdateCustomer.vue";
 import Dashboard from"@/pages/Dashboard.vue";
 import Signin from "@/pages/loginRegister/Signin.vue";
+import Signup from "@/pages/loginRegister/Signup.vue";
 import Test from "@/pages/Test.vue";
 import CreateUser from "@/pages/users/CreateUser.vue";
 import UpdateUser from "@/pages/users/UpdateUser.vue";
@@ -15,7 +16,9 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes=[
     
-{ path: '/Login', name: 'Login', component: Signin, meta: { public: true },},
+  { path: '/Login', name: 'Login', component: Signin, meta: { public: true }, },
+{ path: '/signup', name: 'Signup', component: Signup, meta: { public: true } }, 
+
     {
     path: '/',
     component: MainLayout,

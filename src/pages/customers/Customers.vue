@@ -67,7 +67,7 @@ const deleteCustomers = (id) => {
                 <div class="row col-sm-12 ">
                     <div class="col-sm-6 col-md-6">
                         <!-- ekhane kono content nai, tai eta khali thakbe -->
-
+                        <a href="customers/create" class="btn btn-primary">Add Customer</a>
                     </div>
                     <form action="#">
                         <div class="col-sm-6 col-md-12 text-end mb-2 d-flex justify-content-end">
@@ -115,7 +115,7 @@ const deleteCustomers = (id) => {
                                 <tr v-for="customer in customers" role="row" class="odd">
                                     <td class="sorting_1">{{ customer.id }}</td>
                                     <td>{{ customer.name }}</td>
-                                    <td> <img width="50" :src="`${imgUrl}/${customer.photo}`"  alt="" srcset=""></td>
+                                    <td> <img width="50" :src="`${imgUrl}/${customer.photo}`" alt="" srcset=""></td>
                                     <td>{{ customer.phone }}</td>
                                     <td>{{ customer.email }}</td>
                                     <td>{{ customer.address }}</td>
@@ -140,7 +140,7 @@ const deleteCustomers = (id) => {
                                 formatPageLabel(page.label) }}</a></li>
                     </ul>
                 </div>
-                
+
             </div>
         </div>
     </div>

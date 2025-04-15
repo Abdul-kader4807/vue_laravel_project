@@ -5,9 +5,9 @@
 				<div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
 				</div>
 
-				<div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
+				<!-- <div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
 					<a href="avascript:;" class="btn d-flex align-items-center"><i class='bx bx-search'></i>Search</a>
-				</div>
+				</div> -->
 
 				<div class="top-menu ms-auto">
 					<ul class="navbar-nav align-items-center gap-1">
@@ -18,9 +18,13 @@
 						</li>
 						<li class="nav-item dropdown dropdown-laungauge d-none d-sm-flex">
 							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="avascript:;"
-								data-bs-toggle="dropdown"><img src="/assets/images/county/02.png" width="22" alt="">
+								data-bs-toggle="dropdown"><img src="/assets/images/bangladesh.png" width="22" alt="">
 							</a>
 							<ul class="dropdown-menu dropdown-menu-end">
+								<li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+											src="/assets/images/bangladesh.png" width="20" alt=""><span
+											class="ms-2">Bangla</span></a>
+								</li>
 								<li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
 											src="/assets/images/county/01.png" width="20" alt=""><span
 											class="ms-2">English</span></a>
@@ -631,10 +635,10 @@
 				<div class="user-box dropdown px-3">
 					<a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="/assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+						<img src="/assets/images/photo.png" class="user-img" alt="user avatar">
 						<div class="user-info">
-							<p class="user-name mb-0">Pauline Seitz</p>
-							<p class="designattion mb-0">Web Designer</p>
+							<p class="user-name mb-0">ABDUL KADER</p>
+							<p class="designattion mb-0">Full Stack Developer</p>
 						</div>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-end">

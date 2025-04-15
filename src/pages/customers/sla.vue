@@ -37,7 +37,6 @@
                         <label class="form-label">Upload New Photo:</label>
                         <input @change="onFileChange" class="form-control" type="file" />
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label">Purchase Price</label>
                         <input v-model="product.purchase_price" type="number" step="0.01" class="form-control"
@@ -111,6 +110,7 @@ const fetchProduct = () => {
     api.get(`/products/${id}`)
         .then((res) => {
             console.log(res.data);
+
             product.id = res.data.id
             product.name = res.data.name
             product.category_id = res.data.category_id

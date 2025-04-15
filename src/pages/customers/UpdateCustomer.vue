@@ -1,7 +1,6 @@
 
 <script setup>
 import api from '@/Api';
-
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -19,7 +18,18 @@ const customerData = reactive({
 });
 
 const UpdateCustomers = () => {
-  api.put("/customers/" + customer.id, customer)
+
+
+  const formData = new FormData();
+    formData.append("_method", "PUT")
+    formData.append("id", customerData.id)
+    formData.append("name", customerData.name)
+    formData.append("email", customerData.email)
+    formData.append("phone", customerData.phone)
+    formData.append("address", customerData.address)
+    formData.append("photo", customerData.photo)
+
+  api.post("/customers/" + customerData.id, formData)
     .then(res => {
       console.log(res);
 
@@ -35,43 +45,30 @@ const UpdateCustomers = () => {
 const fetchCustomer = () => {
   api.get(`/customers/${id}`)
     .then((res) => {
-      console.log(res.data);
-
-      customer.id = res.customer.id;
-      customer.name = res.customer.name;
-      customerData.email = customer.email;
-      customerData.phone = customer.phone;
-      customerData.address = customer.address;
+      console.log(res.data.customer);
+      customerData.id = res.data.customer.id;
+      customerData.name = res.data.customer.name;
+      customerData.email = res.data.customer.email;
+      customerData.phone = res.data.customer.phone;
+      customerData.address = res.data.customer.address;
+      customerData.photo = res.data.customer.photo;
     }).catch((err) => {
       console.log(err);
     });
 };
+const onFileChange = (event) => {
+  const file = event.target.files[0];
+ 
+  customerData.photo = file;
+    previewUrl.value = URL.createObjectURL(file); // Show preview
+ 
+};
+
 
 onMounted(() => {
   fetchCustomer();
 });
 
-const photoup = (e) => {
-  customerData.photo = e.target.files[0];
-};
-
-const formSubmit = () => {
-  const formData = new FormData();
-  formData.append('name', customerData.name);
-  formData.append('email', customerData.email);
-  formData.append('phone', customerData.phone);
-  formData.append('address', customerData.address);
-
-    formData.append('photo', customerData.photo);
-
-  api.put(`/customers/${customerData.id}`, formData)
-    .then((result) => {
-      console.log(result);
-      router.push("/customers");
-    }).catch((err) => {
-      console.log(err);
-    });
-};
 </script>
 
 
@@ -82,7 +79,8 @@ const formSubmit = () => {
       <div class="card">
         <div class="card-body p-4">
           <h5 class="mb-4">Customer Form</h5>
-          <form @submit.prevent="formSubmit">
+          {{ customerData }}
+          <form @submit.prevent="UpdateCustomers">
             <div class="row mb-3">
               <label for="name" class="col-sm-3 col-form-label">Name</label>
               <div class="col-sm-9">
@@ -113,14 +111,34 @@ const formSubmit = () => {
                 <input v-model="customerData.address" type="text" class="form-control" id="address"
                   placeholder="Address">
               </div>
+            </div> 
+
+             <!-- <div v-if="customerData.photo && !(customerData.photo instanceof File)" class="row mb-3">
+              <label for="photo" class="col-sm-3 col-form-label">Photo</label>
+              <img :src="`/uploads/customers/${customerData.photo}`" alt="Customer Image" width="100" />
+
+      
+            </div> -->
+
+            <!-- photo preview -->
+            <div v-if="previewUrl" class="row mb-3">
+              <label for="photo" class="col-sm-3 col-form-label">Preview:</label>
+              <img :src="previewUrl" alt="Photo Preview" width="100" />
+              style="max-width: 150px; max-height: 150px; border: 1px solid #ddd; padding: 5px;" />
+              <!-- <div class="col-sm-9">
+                <input @change="photoup" type="file" class="form-control" id="photo">
+              </div> -->
             </div>
 
             <div class="row mb-3">
-              <label for="photo" class="col-sm-3 col-form-label">Photo</label>
+              <label  class="col-sm-3 col-form-label"> Upload New Photo</label>
+      
               <div class="col-sm-9">
-                <input @change="photoup" type="file" class="form-control" id="photo">
+                <input @change="onFileChange" type="file" class="form-control" id="photo">
               </div>
             </div>
+
+
 
             <div class="row">
               <div class="col-sm-9 offset-sm-3 ">

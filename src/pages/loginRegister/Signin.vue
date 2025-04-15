@@ -1,11 +1,11 @@
 <template>
     <!--wrapper-->
     <div class="wrapper">
-        <div class="section-authentication-cover">
+        <div class="section-authentication-cover ">
             <div class="">
                 <div class="row g-0">
 
-                    <div
+                    <!-- <div
                         class="col-12 col-xl-7 col-xxl-8 auth-cover-left align-items-center justify-content-center d-none d-xl-flex">
                         <div class="card shadow-none bg-transparent shadow-none rounded-0 mb-0">
                             <div class="card-body">
@@ -13,11 +13,11 @@
                                     class="img-fluid auth-img-cover-login" width="650" alt="" />
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-12 col-xl-5 col-xxl-4 auth-cover-right align-items-center justify-content-center">
+                    <div class="col-12 col-xl-5  col-xxl-4 auth-cover-right align-items-center justify-content-center ">
                         <div class="card rounded-0 m-3 shadow-none bg-transparent mb-0">
-                            <div class="card-body p-sm-5">
+                            <div class="card-body p-sm-5 ">
                                 <div class="">
                                     <!-- {{ loginObj }} -->
                                     <div class="mb-3 text-center">
@@ -33,7 +33,7 @@
                                                 <div class="col-12">
                                                     <label for="inputEmailAddress" class="form-label">Email</label>
                                                     <input type="email" class="form-control" id="inputEmailAddress"
-                                                        v-model="loginObj.email" placeholder="john@example.com">
+                                                        v-model="loginObj.email" placeholder="ak@example.com">
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="inputChoosePassword" class="form-label">Password</label>
@@ -65,7 +65,7 @@
                                                 <div class="col-12">
                                                     <div class="text-center">
                                                         <p class="mb-0">Don't have an account yet?
-                                                            <a href="authentication-signup.html">Sign up here</a>
+                                                            <a href="/signup">Sign up here</a>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -120,9 +120,9 @@ const loginObj = reactive({
     password: ""
 });
 
-const handleLogin = () => {
+const handleLogin = async () => {
     try {
-        auth.login(loginObj);
+        await auth.login(loginObj);
         router.push("/dashboard");
     } catch (error) {
         console.log(error);
@@ -142,4 +142,11 @@ const handleLogin = () => {
 
 <style>
 /* You can add your styles here if needed */
+.auth-cover-right {
+    display: block;
+    background-color: #ffffff;
+    min-height: 100vh;
+    width: 500px;
+    margin: 50px auto;
+}
 </style>
