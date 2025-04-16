@@ -22,7 +22,7 @@ const fetchSuppliers = (url = "/suppliers") => {
     }
     api.get(url, { params: { search: search.value } })
         .then((result) => {
-            console.log(result);
+            console.log(result.data);
             suppliers.value = result.data.data
             links.value = result.data
 
@@ -30,6 +30,9 @@ const fetchSuppliers = (url = "/suppliers") => {
             console.log(err);
         });
 }
+
+
+
 console.clear()
 console.log(links)
 

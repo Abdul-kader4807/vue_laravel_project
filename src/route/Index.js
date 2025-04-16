@@ -8,6 +8,8 @@ import UpdateCustomer from "@/pages/customers/UpdateCustomer.vue";
 import Dashboard from"@/pages/Dashboard.vue";
 import Signin from "@/pages/loginRegister/Signin.vue";
 import Signup from "@/pages/loginRegister/Signup.vue";
+import CreateProduct from "@/pages/products/CreateProduct.vue";
+import Products from "@/pages/products/Products.vue";
 import Stocks from "@/pages/stock/Stocks.vue";
 import CreateSupplier from "@/pages/suppliers/CreateSupplier.vue";
 import Suppliers from "@/pages/suppliers/Suppliers.vue";
@@ -58,7 +60,11 @@ const routes=[
 
     { path: 'warehouses', component: Warehouses },
     { path: 'warehouses/create', component: CreateWarehouse },
-    { path: 'warehouses/edit/:id', component: UpdateWarehouse },
+      { path: 'warehouses/edit/:id', component: UpdateWarehouse },
+    
+    { path: 'products', component: Products },
+    { path: 'products/create', component: CreateProduct },
+
 
 
     { path: 'users', component: Users },
