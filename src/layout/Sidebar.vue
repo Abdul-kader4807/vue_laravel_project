@@ -81,7 +81,7 @@
 					<div class="menu-title">Customer</div>
 				</a>
 				<ul>
-					<li> <a href="component-alerts.html"><i class='bx bx-radio-circle'></i>Customer List</a>
+					<li> <a href="/customers"><i class='bx bx-radio-circle'></i>Customer List</a>
 					</li>
 					<li> <a href="component-accordions.html"><i class='bx bx-radio-circle'></i>Prescriptions</a>
 					</li>
@@ -140,6 +140,9 @@
 					<div class="menu-title">Stock</div>
 				</a>
 				<ul>
+					<li> <a href="/stock"><i class='bx bx-radio-circle'></i>Stock List</a>
+					</li>
+
 					<li> <a href="icons-line-icons.html"><i class='bx bx-radio-circle'></i>Stock-Report</a>
 					</li>
 					<li> <a href="icons-boxicons.html"><i class='bx bx-radio-circle'></i>Transactions</a>
@@ -161,7 +164,7 @@
 					<div class="menu-title">Warehouse</div>
 				</a>
 				<ul>
-					<li> <a href="icons-line-icons.html"><i class='bx bx-radio-circle'></i>Warehouse-List</a>
+					<li> <a href="/warehouses"><i class='bx bx-radio-circle'></i>Warehouse-List</a>
 					</li>
 
 				</ul>
@@ -176,7 +179,7 @@
 					<div class="menu-title">Supplier</div>
 				</a>
 				<ul>
-					<li> <a href="icons-line-icons.html"><i class='bx bx-radio-circle'></i>Supplier-List</a>
+					<li> <a href="/suppliers"><i class='bx bx-radio-circle'></i>Supplier-List</a>
 					</li>
 					<li> <a href="icons-boxicons.html"><i class='bx bx-radio-circle'></i>Supplier-Report</a>
 					</li>
@@ -198,7 +201,7 @@
 				<ul>
 					<li> <a href="icons-line-icons.html"><i class='bx bx-radio-circle'></i>Product List </a>
 					</li>
-					<li> <a href="icons-boxicons.html"><i class='bx bx-radio-circle'></i>Category List</a>
+					<li> <a href="/category"><i class='bx bx-radio-circle'></i>Category List</a>
 					</li>
 					<li> <a href="icons-feather-icons.html"><i class='bx bx-radio-circle'></i>Brand List</a>
 					</li>
@@ -213,7 +216,26 @@
 
 
 
+<li>
+				<a class="has-arrow" href="javascript:;">
+					<div class="parent-icon"><i class="bx bx-book-bookmark"></i>
+					</div>
+					<div class="menu-title">Reference Data</div>
+				</a>
+				<ul>
+					<li> <a href="table-basic-table.html"><i class='bx bx-radio-circle'></i>Adjustment Types</a>
+					</li>
+					<li> <a href="table-datatable.html"><i class='bx bx-radio-circle'></i>Transaction Types </a>
+					</li>
+					<li> <a href="table-datatable.html"><i class='bx bx-radio-circle'></i>UOMs</a>
+					</li>
+					<li> <a href="table-datatable.html"><i class='bx bx-radio-circle'></i>Status List</a>
+					</li>
+					<li> <a href="table-datatable.html"><i class='bx bx-radio-circle'></i>PaymentStatus List </a>
+					</li>
 
+				</ul>
+			</li>
 
 
 
@@ -285,26 +307,7 @@
 					</li> -->
 				</ul>
 			</li>
-			<li>
-				<a class="has-arrow" href="javascript:;">
-					<div class="parent-icon"><i class="bx bx-book-bookmark"></i>
-					</div>
-					<div class="menu-title">Reference Data</div>
-				</a>
-				<ul>
-					<li> <a href="table-basic-table.html"><i class='bx bx-radio-circle'></i>Adjustment Types</a>
-					</li>
-					<li> <a href="table-datatable.html"><i class='bx bx-radio-circle'></i>Transaction Types </a>
-					</li>
-					<li> <a href="table-datatable.html"><i class='bx bx-radio-circle'></i>UOMs</a>
-					</li>
-					<li> <a href="table-datatable.html"><i class='bx bx-radio-circle'></i>Status List</a>
-					</li>
-					<li> <a href="table-datatable.html"><i class='bx bx-radio-circle'></i>PaymentStatus List </a>
-					</li>
-
-				</ul>
-			</li>
+			
 
 			<li>
 				<a class="has-arrow" href="javascript:;">
