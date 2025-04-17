@@ -1,4 +1,5 @@
 import MainLayout from "@/layout/MainLayout.vue";
+import CreateSales from "@/pages/cart/CreateSales.vue";
 import Categories from "@/pages/category/Categories.vue";
 import CreateCategory from "@/pages/category/CreateCategory.vue";
 import UpdateCategory from "@/pages/category/UpdateCategory.vue";
@@ -70,6 +71,9 @@ const routes=[
     { path: 'sales_report', component: SealsReport },
 
 
+
+
+    { path: 'sales', component: CreateSales },
 
     { path: 'users', component: Users },
     { path: 'users/create', component: CreateUser },

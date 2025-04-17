@@ -69,7 +69,7 @@
 					</li>
 					<li> <a href="ecommerce-products.html"><i class='bx bx-radio-circle'></i>Seals list</a>
 					</li>
-					<li> <a href="ecommerce-products-details.html"><i class='bx bx-radio-circle'></i>Seals Report</a>
+					<li> <a href="sales_report"><i class='bx bx-radio-circle'></i>Seals Report</a>
 					</li>
 
 				</ul>
@@ -216,7 +216,7 @@
 
 
 
-<li>
+			<li>
 				<a class="has-arrow" href="javascript:;">
 					<div class="parent-icon"><i class="bx bx-book-bookmark"></i>
 					</div>
@@ -307,7 +307,7 @@
 					</li> -->
 				</ul>
 			</li>
-			
+
 
 			<li>
 				<a class="has-arrow" href="javascript:;">

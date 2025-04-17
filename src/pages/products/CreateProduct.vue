@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-const categories = ref([]);
+const category = ref([]);
 const manufacturers = ref([]);
 const uoms = ref([]);
 const brands = ref([]);
@@ -96,55 +96,59 @@ const onFileChange = (event) => {
 
 const fetchCategories = () => {
     api
-        .get('/categories')
+        .get('/categories/data')
         .then((result) => {
-            categories.value = result.data;
+            console.log(result.data.brands);
+            
+            category.value = result.data.category;
+            uoms.value = result.data.uoms;
+            manufacturers.value = result.data.manufacturers;
+            brands.value = result.data.brands;
+
         })
         .catch((err) => {
             console.error(err);
         });
 };
 
-const fetchManufacturers = () => {
-    api
-        .get('/manufacturer')
-        .then((result) => {
-            manufacturers.value = result.data;
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-};
+// const fetchManufacturers = () => {
+//     api
+//         .get('/manufacturer')
+//         .then((result) => {
+//             manufacturers.value = result.data;
+//         })
+//         .catch((err) => {
+//             console.error(err);
+//         });
+// };
 
 
-const fetchUoms = () => {
-    api
-        .get('/uoms')
-        .then((result) => {
-            uoms.value = result.data;
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-};
+// const fetchUoms = () => {
+//     api
+//         .get('/uoms')
+//         .then((result) => {
+//             uoms.value = result.data;
+//         })
+//         .catch((err) => {
+//             console.error(err);
+//         });
+// };
 
-const fetchBrands = () => {
-    api
-        .get('/brands')
-        .then((result) => {
-            brands.value = result.data;
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-};
+// const fetchBrands = () => {
+//     api
+//         .get('/brands')
+//         .then((result) => {
+//             brands.value = result.data;
+//         })
+//         .catch((err) => {
+//             console.error(err);
+//         });
+// };
 
 
 onMounted(() => {
-    fetchCategories();
-    fetchManufacturers();
-    fetchUoms();
-    fetchBrands();
+    fetchCategories()
+   
 });
 
 
@@ -175,8 +179,8 @@ onMounted(() => {
                             <label class="form-label">Category</label>
                             <select v-model="productData.category_id" class="form-select" name="category">
                                 <option value="">Select Category</option>
-                                <option v-for="category in categories" :key="category.id" :value="category.id">
-                                    {{ category.name }}
+                                <option v-for="c in category"  :value="c.id">
+                                    {{ c.name }}
                                 </option>
                             </select>
                         </div>
@@ -186,8 +190,8 @@ onMounted(() => {
                             <label class="form-label">Brand</label>
                             <select v-model="productData.brand_id" class="form-select" name="brand">
                                 <option value="">Select Brand</option>
-                                <option v-for="brand in brands" :key="brand.id" :value="brand.id">
-                                    {{ brand.name }}
+                                <option v-for="b in brands" :key="b.id" :value="b.id">
+                                    {{ b.brand_name }}
                                 </option>
                             </select>
                         </div>
@@ -196,8 +200,8 @@ onMounted(() => {
                             <label class="form-label">UOM</label>
                             <select v-model="productData.uom_id" class="form-select" name="uom">
                                 <option value="">Select UOM</option>
-                                <option v-for="uom in uoms" :key="uom.id" :value="uom.id">
-                                    {{ uom.name }}
+                                <option v-for="u in uoms" :key="u.id" :value="u.id">
+                                    {{ u.name }}
                                 </option>
                             </select>
                         </div>
@@ -206,9 +210,9 @@ onMounted(() => {
                             <label class="form-label">Manufacturer</label>
                             <select v-model="productData.manufacturer_id" class="form-select" name="manufacturer">
                                 <option value="">Select Manufacturer</option>
-                                <option v-for="manufacturer in manufacturers" :key="manufacturer.id"
-                                    :value="manufacturer.id">
-                                    {{ manufacturer.name }}
+                                <option v-for="m in manufacturers" :key="m.id"
+                                    :value="m.id">
+                                    {{ m.name }}
                                 </option>
                             </select>
                         </div>
