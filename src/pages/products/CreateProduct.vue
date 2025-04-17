@@ -1,9 +1,17 @@
 <script setup>
-import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
 import api from '@/Api';
+import {onMounted , reactive,  ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+const categories = ref([]);
+const manufacturers = ref([]);
+const uoms = ref([]);
+const brands = ref([]);
+const previewUrl = ref(null); // Add this line
+
+
 
 const productData = reactive({
 
@@ -33,11 +41,7 @@ const productData = reactive({
     photo: '',
 });
 
-const handleFileChange = (e) => {
-    productData.photo = e.target.files[0];
-};
-
-const formSubmit = () => {
+const createProducts = () => {
     const formData = new FormData();
     formData.append('name', productData.name);
     formData.append('category_id', productData.category_id);
@@ -62,42 +66,86 @@ const formSubmit = () => {
     formData.append('size', productData.size);
     formData.append('is_featured', productData.is_featured);
     formData.append('is_brand', productData.is_brand);
+    formData.append('photo', productData.photo);
 
-    if (productData.photo) {
-        formData.append('photo', productData.photo);
-    }
 
-    api.post('/product', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    })
-        .then((result) => {
-            console.log(result);
-            router.push('/proudcts');
+    api
+        .post('/product', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then((res) => {
+            console.log(res);
+            router.push({ path: '/products' });
         })
         .catch((err) => {
-            console.log(err);
+            console.error(err);
         });
-
 };
-const fetchCategories = () => {
-    api.get('/category').then((res) => {
-        categories.value = res.data.categories
-    })
-}
 
-const fetchBrands = () => {
-    api.get('/brands').then((res) => {
-        brands.value = res.data.brands
-    })
-}
+
+const onFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        productData.photo = file;
+        previewUrl.value = URL.createObjectURL(file); // Show preview
+    }
+};
+
+
+const fetchCategories = () => {
+    api
+        .get('/categories')
+        .then((result) => {
+            categories.value = result.data;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+};
 
 const fetchManufacturers = () => {
-    api.get('/manufacturer').then((res) => {
-        manufacturers.value = res.data.manufacturers
-    })
-}
+    api
+        .get('/manufacturer')
+        .then((result) => {
+            manufacturers.value = result.data;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+};
+
+
+const fetchUoms = () => {
+    api
+        .get('/uoms')
+        .then((result) => {
+            uoms.value = result.data;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+};
+
+const fetchBrands = () => {
+    api
+        .get('/brands')
+        .then((result) => {
+            brands.value = result.data;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+};
+
+
+onMounted(() => {
+    fetchCategories();
+    fetchManufacturers();
+    fetchUoms();
+    fetchBrands();
+});
 
 
 </script>
@@ -107,8 +155,8 @@ const fetchManufacturers = () => {
         <div class="col-lg-8 mx-auto">
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="mb-4">Customer Form</h5>
-                    <form @submit.prevent="formSubmit">
+                    <h5 class="mb-4"> Add Product Form</h5>
+                    <form @submit.prevent="createProducts">
 
                         <div class="mb-3">
                             <label class="form-label">Product Name</label>
@@ -125,10 +173,10 @@ const fetchManufacturers = () => {
 
                         <div class="mb-3">
                             <label class="form-label">Category</label>
-                            <select v-model="productData.category_id" class="form-select">
-                                <option disabled value="">Select Category</option>
-                                <option v-for="cat in categories" :key="cat.id" :value="cat.id">
-                                    {{ cat.name }}
+                            <select v-model="productData.category_id" class="form-select" name="category">
+                                <option value="">Select Category</option>
+                                <option v-for="category in categories" :key="category.id" :value="category.id">
+                                    {{ category.name }}
                                 </option>
                             </select>
                         </div>
@@ -136,8 +184,8 @@ const fetchManufacturers = () => {
 
                         <div class="mb-3">
                             <label class="form-label">Brand</label>
-                            <select v-model="productData.brand_id" class="form-select">
-                                <option disabled value="">Select Brand</option>
+                            <select v-model="productData.brand_id" class="form-select" name="brand">
+                                <option value="">Select Brand</option>
                                 <option v-for="brand in brands" :key="brand.id" :value="brand.id">
                                     {{ brand.name }}
                                 </option>
@@ -146,20 +194,21 @@ const fetchManufacturers = () => {
 
                         <div class="mb-3">
                             <label class="form-label">UOM</label>
-                            <select v-model="productData.uom_id" class="form-select">
-                                <option disabled value="">Select UOM</option>
-                                <option v-for="u in uoms" :key="u.id" :value="u.id">
-                                    {{ u.name }}
+                            <select v-model="productData.uom_id" class="form-select" name="uom">
+                                <option value="">Select UOM</option>
+                                <option v-for="uom in uoms" :key="uom.id" :value="uom.id">
+                                    {{ uom.name }}
                                 </option>
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Manufacturer</label>
-                            <select v-model="productData.manufacturer_id" class="form-select">
-                                <option disabled value="">Select Manufacturer</option>
-                                <option v-for="m in manufacturers" :key="m.id" :value="m.id">
-                                    {{ m.name }}
+                            <select v-model="productData.manufacturer_id" class="form-select" name="manufacturer">
+                                <option value="">Select Manufacturer</option>
+                                <option v-for="manufacturer in manufacturers" :key="manufacturer.id"
+                                    :value="manufacturer.id">
+                                    {{ manufacturer.name }}
                                 </option>
                             </select>
                         </div>
@@ -260,9 +309,18 @@ const fetchManufacturers = () => {
                         <div class="row mb-3">
                             <label for="photo" class="col-sm-3 col-form-label">Photo</label>
                             <div class="col-sm-9">
-                                <input @change="handleFileChange" type="file" class="form-control" id="photo">
+                                <input @change="onFileChange" type="file" class="form-control" id="photo">
                             </div>
                         </div>
+                        <!-- photo preview -->
+                        <div class="row mb-3" v-if="previewUrl">
+                            <label for="photo" class="col-sm-3 col-form-label">Preview</label>
+                            <div class="col-sm-9">
+                                <img :src="previewUrl" alt="Photo Preview"
+                                    style="max-width: 150px; max-height: 150px; border: 1px solid #ddd; padding: 5px;" />
+                            </div>
+                        </div>
+
 
                         <div class="row">
                             <div class="col-sm-9 offset-sm-3">

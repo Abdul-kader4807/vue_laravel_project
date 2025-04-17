@@ -199,7 +199,7 @@
 					<div class="menu-title">Products</div>
 				</a>
 				<ul>
-					<li> <a href="icons-line-icons.html"><i class='bx bx-radio-circle'></i>Product List </a>
+					<li> <a href="/products"><i class='bx bx-radio-circle'></i>Product List </a>
 					</li>
 					<li> <a href="/category"><i class='bx bx-radio-circle'></i>Category List</a>
 					</li>

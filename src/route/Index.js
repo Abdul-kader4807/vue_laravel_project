@@ -10,6 +10,7 @@ import Signin from "@/pages/loginRegister/Signin.vue";
 import Signup from "@/pages/loginRegister/Signup.vue";
 import CreateProduct from "@/pages/products/CreateProduct.vue";
 import Products from "@/pages/products/Products.vue";
+import SealsReport from "@/pages/report/SealsReport.vue";
 import Stocks from "@/pages/stock/Stocks.vue";
 import CreateSupplier from "@/pages/suppliers/CreateSupplier.vue";
 import Suppliers from "@/pages/suppliers/Suppliers.vue";
@@ -30,7 +31,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 
 const routes=[
-    
+  { path: '/', redirect: '/Login' },
   { path: '/Login', name: 'Login', component: Signin, meta: { public: true }, },
 { path: '/signup', name: 'Signup', component: Signup, meta: { public: true } }, 
 
@@ -64,6 +65,9 @@ const routes=[
     
     { path: 'products', component: Products },
     { path: 'products/create', component: CreateProduct },
+
+
+    { path: 'sales_report', component: SealsReport },
 
 
 

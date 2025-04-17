@@ -67,6 +67,7 @@ const deleteproducts = (id) => {
                 <div class="row col-sm-12 ">
                     <div class="col-sm-6 col-md-6">
                         <!-- ekhane kono content nai, tai eta khali thakbe -->
+                         
                         <a href="products/create" class="btn btn-primary">Add product</a>
                     </div>
                     <form action="#">
