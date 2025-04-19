@@ -125,7 +125,7 @@
 					<div class="menu-title">Purchases</div>
 				</a>
 				<ul>
-					<li> <a href="content-grid-system.html"><i class='bx bx-radio-circle'></i>Purchase Orders</a>
+					<li> <a href="purchase"><i class='bx bx-radio-circle'></i>Purchase Orders</a>
 					</li>
 					<li> <a href="content-typography.html"><i class='bx bx-radio-circle'></i>Purchase Details</a>
 					</li>

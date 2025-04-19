@@ -119,7 +119,7 @@
                                         <td>{{ i + 1 }}</td>
                                         <td>{{ item.name }}</td>
                                         <td>{{ item.strength }}</td>
-                                        <td>{{ item.uom }}</td>
+                                        <td>{{ item.uom_name }}</td>
                                         <td>{{ item.price }}</td>
                                         <td>{{ item.qty }}</td>
                                         <td>{{ item.discount }}</td>
@@ -217,7 +217,8 @@ const dataObj = reactive({
     qty: 1,
     discount: 0,
     totalDiscount: 0,
-    grandTotal: 0
+    grandTotal: 0,
+    vat:0
 })
 
 
@@ -255,7 +256,8 @@ const addToCart = () => {
         discount: calculate_discount,
         qty: dataObj.qty,
         subtotal: subtotal,
-        uom: dataObj.selectedUom.name
+        uom: dataObj.selectedUom.id,
+        uom_name: dataObj.selectedUom.name
     }
     cart.save(data)
     cartItems.value = cart.getCart();
@@ -295,6 +297,7 @@ const processOrder = () => {
         status: dataObj.selectedStatus,
         discount: dataObj.totalDiscount,
         grandtotal: dataObj.grandTotal,
+        vat:dataObj.vat
     }
 
     api.post("/sales/processOrder", processData)
