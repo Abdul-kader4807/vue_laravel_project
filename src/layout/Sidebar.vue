@@ -65,7 +65,7 @@
 					<div class="menu-title">Seals</div>
 				</a>
 				<ul>
-					<li> <a href="ecommerce-products.html"><i class='bx bx-radio-circle'></i>Seals</a>
+					<li> <a href="sales"><i class='bx bx-radio-circle'></i>Seals</a>
 					</li>
 					<li> <a href="ecommerce-products.html"><i class='bx bx-radio-circle'></i>Seals list</a>
 					</li>
@@ -129,7 +129,7 @@
 					</li>
 					<li> <a href="content-typography.html"><i class='bx bx-radio-circle'></i>Purchase Details</a>
 					</li>
-					<li> <a href="content-text-utilities.html"><i class='bx bx-radio-circle'></i>Purchase Report</a>
+					<li> <a href="purchase_report"><i class='bx bx-radio-circle'></i>Purchase Report</a>
 					</li>
 				</ul>
 			</li>

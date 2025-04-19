@@ -11,7 +11,9 @@ import Signin from "@/pages/loginRegister/Signin.vue";
 import Signup from "@/pages/loginRegister/Signup.vue";
 import CreateProduct from "@/pages/products/CreateProduct.vue";
 import Products from "@/pages/products/Products.vue";
+import PurchaseReport from "@/pages/report/PurchaseReport.vue";
 import SealsReport from "@/pages/report/SealsReport.vue";
+
 import Stocks from "@/pages/stock/Stocks.vue";
 import CreateSupplier from "@/pages/suppliers/CreateSupplier.vue";
 import Suppliers from "@/pages/suppliers/Suppliers.vue";
@@ -67,8 +69,10 @@ const routes=[
     { path: 'products', component: Products },
     { path: 'products/create', component: CreateProduct },
 
-
+//REPORT
     { path: 'sales_report', component: SealsReport },
+    { path: 'purchase_report', component: PurchaseReport },
+   
 
 
 

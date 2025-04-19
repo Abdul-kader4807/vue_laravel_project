@@ -26,25 +26,37 @@
                                         </a>
                                     </h2>
                                     <div>123 Health Street, Medicity</div>
-                                    <div>Phone: (123) 456-7890</div>
+                                    <div>Phone: (+88) 0177-1509646</div>
                                     <div>Email: info@citypharmacy.com</div>
                                 </div>
                             </div>
                         </header>
                         <main>
-                            <div class="row contacts">
-                                <div class="col invoice-to">
-                                    <h4 class="to">BILL TO:</h4>
-                                    <select class="form-control supplier_id" name="supplier_id" id="supplier_id">
-                                        <option value="1">Supplier One</option>
-                                        <option value="2">Supplier Two</option>
+                            <div class="row contacts col-12">
+                                <h4 class="to">BILL TO:</h4>
+                                <div class="col invoice-to col sm-4">
+                                    <h4 class="pb-2">Customer</h4>
+                                    <select v-model="dataObj.selectedCustomer" class="form-control" name="" id="">
+                                        <option disabled value="">Select Customer</option>
+                                        <option v-for="c in customers" :key="c.id" :value="c">{{ c.name }}</option>
                                     </select>
-                                    <p>Email:<span class="email"></span></p>
-                                    <p>Phone:<span class="phone"></span></p>
-                                    <p>Address:<span class="address"></span></p>
-                                    <p>Representative:<span class="contact_person"></span></p>
+                                    <p>Phone:{{ dataObj.selectedCustomer.phone }}</p>
+                                    <p>Email:{{ dataObj.selectedCustomer.email }}</p>
+                                    <p>Address:{{ dataObj.selectedCustomer.address }}</p>
+
                                 </div>
-                                <div class="col invoice-details">
+                                <div class="col sm-4">
+                                    <h5 class="pb-2">Warehouse</h5>
+                                    <select v-model="dataObj.selectedWareHouse" class="form-control" name="" id="">
+                                        <option disabled value=""> Select warehouse</option>
+                                        <option v-for="w in warehouse" :key="w.id" :value="w">{{ w.name }}</option>
+                                    </select>
+                                    <p>Phone: {{ dataObj.selectedWareHouse.phone }}</p>
+                                    <p>Location: {{ dataObj.selectedWareHouse.location }}</p>
+                                    <p>Address: {{ dataObj.selectedWareHouse.address }}</p>
+
+                                </div>
+                                <div class="col invoice-details col sm-4">
                                     <h1 class="invoice-id">INVOICE #001</h1>
                                     <div class="date">Date of Invoice: 17/04/2025</div>
                                     <div class="date">Due Date: 02/05/2025</div>
@@ -61,67 +73,90 @@
                                         <th class="fw-bold bg-primary">Qty</th>
                                         <th class="fw-bold bg-primary">Discount</th>
                                         <th class="fw-bold bg-primary">Total</th>
-                                        <th class="fw-bold bg-primary"><button
-                                                class="btn bg-danger clearAll">ClearAll</button></th>
+                                        <th class="fw-bold bg-primary">
+                                            <button  @click="clearCart" class="btn bg-danger">ClearAll</button>
+                                        </th>
                                     </tr>
                                     <tr>
-                                        <th>M001</th>
+                                        <th>#</th>
                                         <th>
-                                            <select class="form-control" name="product_id" id="product_id">
-                                                <option value="">Select Product</option>
-                                                <option value="1">Paracetamol</option>
-                                                <option value="2">Amoxicillin</option>
+                                            <select v-model="dataObj.selectedProduct" class="form-control" name=""
+                                                id="">
+                                                <option disabled value="">Select Product</option>
+                                                <option v-for="p in products" :key="p.id" :value="p">{{ p.name }}
+                                                </option>
+
+                                            </select>
+
+                                        </th>
+                                        <th>{{ dataObj.selectedProduct.strength }}</th>
+                                        <th>
+                                            <select v-model="dataObj.selectedUom" class="form-control" name="" id="">
+                                                <option disabled value="">Select Uom</option>
+                                                <option v-for="u in uoms" :key="u.id" :value="u">{{ u.name }}</option>
+
                                             </select>
                                         </th>
-                                        <th><input type="text" disabled class="form-control p_strength"></th>
+                                        <th>{{ dataObj.selectedProduct.offer_price }}</th>
                                         <th>
-                                            <select class="form-control" name="uom_id" id="uom_id">
-                                                <option value="">Select Uom</option>
-                                                <option value="1">Tablet</option>
-                                                <option value="2">Bottle</option>
-                                            </select>
+                                            <input v-model="dataObj.qty" type="number" name="qty" class="form-control"
+                                                value="1">
                                         </th>
-                                        <th><input type="text" disabled class="form-control p_price"></th>
-                                        <th><input type="number" class="form-control p_qty"></th>
-                                        <th><input type="text" class="form-control p_discount"></th>
+
+                                        <th><input v-model="dataObj.discount" type="number" class="form-control"
+                                                name="discount"></th>
+                                        <!-- <th><input type="text" class="form-control "></th> -->
                                         <th class="total"></th>
                                         <th>
-                                            <button class="btn btn-sm btn-success add_cart_btn">
+                                            <button @click="addToCart" class="btn btn-sm btn-success">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class="dataAppend"> </tbody>
+                                <tbody>
+                                    <tr v-for="(item, i) in cartItems" :key="item.id">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.strength }}</td>
+                                        <td>{{ item.uom }}</td>
+                                        <td>{{ item.price }}</td>
+                                        <td>{{ item.qty }}</td>
+                                        <td>{{ item.discount }}</td>
+                                        <td>{{ item.subtotal }}</td>
+                                        <td><button @click="itemRemove(item.item_id)" class="btn btn-warning"> <i
+                                                    class="fa fa-minus"></i></button></td>
+                                    </tr>
+                                </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="5"></td>
-                                        <td colspan="2">SUBTOTAL</td>
-                                        <td class="subtotal">$562.00</td>
+                                        <!-- <td colspan="5" class="text-end">SUBTOTAL</td> -->
+                                        <td colspan="7" class="text-end">SUBTOTAL</td>
+                                        <td class="subtotal">{{ dataObj.grandTotal - dataObj.vat  }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="5"></td>
                                         <td colspan="2">TOTAL DISCOUNT (5%)</td>
-                                        <td class="Discount">$28.10</td>
+                                        <td class="Discount">{{ dataObj.totalDiscount }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="5"></td>
                                         <td colspan="2">TAX (5%)</td>
-                                        <td class="vat">$28.10</td>
+                                        <td class="vat">{{ dataObj.vat }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="5"></td>
                                         <td colspan="2">GRAND TOTAL</td>
-                                        <td class="grandtotal">$590.10</td>
+                                        <td class="grandtotal">{{ dataObj.grandTotal }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
                             <div class="row col-12 mt-">
                                 <div class="col-4 p-2 mt-5">
                                     <label for="status_id" class="form-label status fw-bold">Payment Status</label>
-                                    <select name="status_id" class="status_button form-control">
-                                        <option value="1">Paid</option>
-                                        <option value="2">Unpaid</option>
+                                    <select v-model="dataObj.selectedStatus" name="" class="form-control">
+                                        <option disabled value="">Select Status</option>
+                                        <option  v-for="s in status" :key="s.id" :value="s">{{ s.name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -150,14 +185,150 @@
                         </main>
                         <footer>Pharmacy Invoice - Valid without signature</footer>
                     </div>
-                    <a class="btn btn-primary btn_process" href="purchase">Process</a>
+                    <button @click="processOrder" class="btn btn-primary">Process</button>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script  setup>
+<script setup>
+import api from '@/Api';
+import { onMounted, reactive, ref } from 'vue';
+import { useCart } from './Cart';
+
+
+
+const cart = useCart("sales");
+const cartItems = ref(cart.getCart());
+const warehouse = ref([])
+const products = ref([])
+const customers = ref([])
+const uoms = ref([])
+const status = ref([])
+
+
+const dataObj = reactive({
+    selectedCustomer: {},
+    selectedWareHouse: {},
+    selectedProduct: {},
+    selectedUom: {},
+    selectedStatus: {},
+    qty: 1,
+    discount: 0,
+    totalDiscount: 0,
+    grandTotal: 0
+})
+
+
+const grandTotalCalculation = () => {
+    // dataObj.totalDiscount = cart.getCart().reduce((acc, ele) => acc + ele.discount, 0);
+    // dataObj.vat = cart.getCart().reduce((acc, ele) => acc + ele.subtotal * 0.05, 0);
+    // dataObj.grandTotal = cart.getCart().reduce((acc, ele) => acc +  ele.subtotal , 0);
+
+
+    const subtotal = cart.getCart().reduce((acc, ele) => acc + ele.subtotal, 0);
+    dataObj.totalDiscount = cart.getCart().reduce((acc, ele) => acc + ele.discount, 0);
+    dataObj.vat = subtotal * 0.05;
+    dataObj.grandTotal = subtotal + dataObj.vat;
+
+
+
+    console.log(dataObj.totalDiscount);
+    console.log(dataObj.vat);
+    console.log(dataObj.grandTotal);
+
+
+}
+
+// add to cart 
+
+const addToCart = () => {
+
+    let calculate_discount = dataObj.discount * dataObj.qty
+    let subtotal = (dataObj.selectedProduct.offer_price * dataObj.qty) - calculate_discount
+    const data = {
+        item_id: dataObj.selectedProduct.id,
+        name: dataObj.selectedProduct.name,
+        strength: dataObj.selectedProduct.strength,
+        price: dataObj.selectedProduct.offer_price,
+        discount: calculate_discount,
+        qty: dataObj.qty,
+        subtotal: subtotal,
+        uom: dataObj.selectedUom.name
+    }
+    cart.save(data)
+    cartItems.value = cart.getCart();
+    grandTotalCalculation()
+
+
+
+    console.log(data);
+    dataObj.selectedProduct = {}
+    dataObj.qty = 1
+    dataObj.discount = 0
+}
+
+// item remove 
+const itemRemove = (id) => {
+    console.log(id);
+
+    cart.deleteItem(id);
+    cartItems.value = cart.getCart();
+    grandTotalCalculation()
+}
+
+const clearCart = () => {
+    cart.clearCart();
+    cartItems.value = cart.getCart();
+    grandTotalCalculation()
+}
+
+// order process 
+const processOrder = () => {
+
+    const processData = {
+        products: cart.getCart(),
+        customer: dataObj.selectedCustomer,
+        warehouse: dataObj.selectedWareHouse,
+        uom: dataObj.selectedUom,
+        status: dataObj.selectedStatus,
+        discount: dataObj.totalDiscount,
+        grandtotal: dataObj.grandTotal,
+    }
+
+    api.post("/sales/processOrder", processData)
+        .then((result) => {
+            console.log(result.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+
+}
+
+
+
+// fetch salesData
+const saleData = () => {
+    api.get("/sales/data")
+        .then((result) => {
+            console.log(result.data);
+
+            warehouse.value = result.data.warehouse
+            customers.value = result.data.customers
+            products.value = result.data.products
+            uoms.value = result.data.uoms
+            status.value = result.data.status
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+
+onMounted(() => {
+    saleData()
+    grandTotalCalculation()
+})
+
 
 </script>
 
@@ -196,16 +367,3 @@ td {
     border-top: 1px solid #ddd;
 }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
