@@ -11,7 +11,7 @@ export default defineConfig({
     vueDevTools(),
     
   ],
-  base: 'https://vue-laravel.abdulkader.info',
+  base: 'https://vue-laravel-project-pi.vercel.app',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
