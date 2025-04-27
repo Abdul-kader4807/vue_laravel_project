@@ -9,7 +9,9 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+    
   ],
+  base: 'https://vue-laravel.abdulkader.info',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
